@@ -30,4 +30,34 @@ echo rand(1, 100), "\n\n";
 $numbers = [];
 while(count($numbers) !== 10)
     array_push($numbers, rand());
-echo var_dump($numbers);
+echo var_dump($numbers), "\n";
+
+$a = 8;
+$b = 9;
+echo abs($a - $b), "\n\n";
+
+$numbers = [1, 2, -1, -2, 3, -3];
+$numbers = array_map('abs', $numbers);
+echo var_dump($numbers), "\n\n";
+
+$a = 30;
+$b = 1;
+$divisors = [];
+while ($b <= $a) {
+    if ($a % $b === 0) {
+        array_push($divisors, $b);
+    }
+    $b += 1;
+}
+echo var_dump($divisors), "\n\n";
+
+$numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+$sum = 0;
+$count = 0;
+foreach($numbers as $value) {
+    if ($sum <= 10) {
+        $sum += $value;
+        $count += 1;
+    }
+}
+echo $count, "\n\n";
