@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['user'])) {
-    header ('Location: form.php');
+    header ('Location: index.php');
     exit();
 }
 
