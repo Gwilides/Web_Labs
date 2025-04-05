@@ -20,6 +20,6 @@ $user = $_SESSION['user'];
         <p><strong>Имя:</strong> <?php echo htmlspecialchars($user['name']); ?></p>
         <p><strong>Вид:</strong> <?php echo htmlspecialchars($user['type']); ?></p>
         <p><strong>Возраст:</strong> <?php echo htmlspecialchars($user['age']); ?></p>
-        <a href="form.php">На Главную</a>
+        <a href="index.php">На Главную</a>
     </body>
 </html>
