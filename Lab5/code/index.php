@@ -19,11 +19,6 @@ function displayDirectoryTree($dir, $prefix = '') {
         }
     }
 }
-
-echo "<pre style='background:#f5f5f5; padding:15px; border-radius:5px;'>";
-echo "<strong>Структура папок:</strong>\n";
-displayDirectoryTree('categories');
-echo "</pre>";
 ?>
     <div id="form">
         <form action="save.php" method="post">
