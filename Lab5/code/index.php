@@ -5,21 +5,6 @@
     <title>Lab5</title>
 </head>
 <body>
-<?php
-function displayDirectoryTree($dir, $prefix = '') {
-    $files = scandir($dir);
-    foreach ($files as $file) {
-        if ($file === '.' || $file === '..') continue;
-        
-        $path = $dir . '/' . $file;
-        echo $prefix . '├── ' . $file . "\n";
-        
-        if (is_dir($path)) {
-            displayDirectoryTree($path, $prefix . '│   ');
-        }
-    }
-}
-?>
     <div id="form">
         <form action="save.php" method="post">
             <label for="email">Email</label>
