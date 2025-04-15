@@ -5,6 +5,26 @@
     <title>Lab5</title>
 </head>
 <body>
+<?php
+function displayDirectoryTree($dir, $prefix = '') {
+    $files = scandir($dir);
+    foreach ($files as $file) {
+        if ($file === '.' || $file === '..') continue;
+        
+        $path = $dir . '/' . $file;
+        echo $prefix . '├── ' . $file . "\n";
+        
+        if (is_dir($path)) {
+            displayDirectoryTree($path, $prefix . '│   ');
+        }
+    }
+}
+
+echo "<pre style='background:#f5f5f5; padding:15px; border-radius:5px;'>";
+echo "<strong>Структура папок:</strong>\n";
+displayDirectoryTree('categories');
+echo "</pre>";
+?>
     <div id="form">
         <form action="save.php" method="post">
             <label for="email">Email</label>
