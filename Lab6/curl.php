@@ -4,6 +4,7 @@ $url = 'https://jsonplaceholder.typicode.com/posts';
 
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_CAINFO, 'C:\certs\cacert.pem');
+curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
 
 function curlGet($curl, $url) {
     curl_setopt_array($curl, [
