@@ -1,8 +1,9 @@
 <?php
 $curl = curl_init();
+$url = 'https://jsonplaceholder.typicode.com/posts';
+
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_CAINFO, 'C:\certs\cacert.pem');
-$url = 'https://jsonplaceholder.typicode.com/posts';
 
 function curlGet($curl, $url) {
     curl_setopt_array($curl, [
@@ -55,4 +56,19 @@ function curlDel($curl, $url) {
     return curl_exec($curl);
 }
 
-echo curlDel($curl, $url);
+function curlGetCustomHeaders($curl, $url, $headers = []) {
+    curl_setopt_array($curl, [
+        CURLOPT_URL => $url,
+        CURLOPT_HTTPHEADER => $headers
+    ]);
+
+    return curl_exec($curl);
+}
+
+$headers = [
+    'X-API-Key: sample12345'
+];
+
+echo curlGetCustomHeaders($curl, $url, $headers);
+
+curl_close($curl);
