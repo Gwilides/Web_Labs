@@ -32,7 +32,18 @@ function universalRequest($curl, $url, $method = 'GET', $data = null, $headers =
     curl_setopt_array($curl, $options);
     
     $response = curl_exec($curl);
+    
     $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    if ($httpCode >= 400) {
+        $errorMsg = match($httpCode) {
+            400 => 'Bad Request',
+            401 => 'Unauthorized',
+            404 => 'Not Found',
+            500 => 'Internal Server Error',
+            default => "HTTP Error: $httpCode"
+        };
+        throw new Exception($errorMsg);
+    }
 
     if (!$response) {
         throw new Exception('cURL Error: ' . curl_error($curl));
