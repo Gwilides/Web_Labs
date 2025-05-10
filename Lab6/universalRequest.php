@@ -1,7 +1,5 @@
 <?php
 $curl = curl_init();
-$url = 'https://jsonplaceholder.typicode.com/posts';
-
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_CAINFO, 'C:\certs\cacert.pem');
 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
@@ -32,7 +30,7 @@ function universalRequest($curl, $url, $method = 'GET', $data = null, $headers =
     curl_setopt_array($curl, $options);
     
     $response = curl_exec($curl);
-    
+
     $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
     if ($httpCode >= 400) {
         $errorMsg = match($httpCode) {
@@ -60,22 +58,17 @@ function universalRequest($curl, $url, $method = 'GET', $data = null, $headers =
     ];
 }
 
-$postData = [
-    'title' => 'Lab6',
-    'body' => 'Test',
-    'userId' => 1
-];
-$putData = [
-    'title' => 'Updated Lab6',
-    'body' => 'Updated test',
-    'userId' => 1
-];
-$customHeaders = [
-    'X-API-Key: sample12345',
-    'Cache-Control: no-cache'
-];
 
-echo universalRequest($curl, $url, 'POST', $postData);
-
-curl_close($curl);
+try {
+    $result = universalRequest(
+        $curl,
+        'https://jsonplaceholder.typicode.com/posts/1',
+        'GET'
+    );
+    print_r($result);
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+} finally {
+    curl_close($curl);
+}
 ?>
