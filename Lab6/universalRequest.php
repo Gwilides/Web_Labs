@@ -14,7 +14,7 @@ function universalRequest($curl, $url, $method = 'GET', $data = null, $headers =
             'Accept: application/json'
         ], $headers)
     ];
-    
+
     switch (strtoupper($method)) {
         case 'POST':
             $options[CURLOPT_POST] = true;
@@ -32,8 +32,21 @@ function universalRequest($curl, $url, $method = 'GET', $data = null, $headers =
     curl_setopt_array($curl, $options);
     
     $response = curl_exec($curl);
-    
-    return $response;
+    $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+    if (!$response) {
+        throw new Exception('cURL Error: ' . curl_error($curl));
+    }
+
+    $jsonResponse = json_decode($response, true);
+    if(json_last_error() !== JSON_ERROR_NONE) {
+        throw new Exception('JSON Decode Error: ' . json_last_error_msg());
+    }
+
+    return [
+        'status' => $httpCode,
+        'data' => $jsonResponse
+    ];
 }
 
 $postData = [
