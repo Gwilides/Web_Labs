@@ -71,4 +71,3 @@ try {
 } finally {
     curl_close($curl);
 }
-?>

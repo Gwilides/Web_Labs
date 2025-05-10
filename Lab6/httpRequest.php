@@ -19,4 +19,3 @@ function sendHttpRequest($url, $params = [], $method = 'GET') {
     
     return $response;
 }
-
